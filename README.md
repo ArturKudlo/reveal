@@ -1,0 +1,1 @@
+Inheritance in JavaScript. ES6 Classes.

@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Rolling Scopes Presentation</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="main-first-slide">
+					<h2 class="main-first-slide">ES6 Classes.Inheritance in JavaScript. </h2>
+					<span class="author"><span class="by">by</span> <a href="https://github.com/ArturKudlo">Artur Kudla</a></span>
+				</section>
+				<section>
+					<section class="what">
+						<h2>What is <span class="key">class</span>?</h2>
+					</section>
+					<section>
+						<h2><span class="key">Class</span> is a schema</h2>
+						<img src="images/schema.jpg" class="sheme" alt="sheme">
+					</section>
+					<section><h2>What is <span class="key">Object</span>?</h2></section>
+					<section>
+							<p><span class="key">Object</span> is an independent unit that has properties and a certain type.</p>
+							<img src="images/lego_object.jpg" class="lego_object" alt="lego_object">
+					</section>
+					<section>
+						<h2>What is <span class="key">Object</span>?</h2>
+						<p>The object is a modifiable collection of properties.</p>
+					</section>
+					<section>
+						<h3>Object <span class="includes">includes</span> :</h3>
+						<p class="fragment" data-fragment-index="1"><span class="includes">Key</span> - it unique string (in scope of object)</p>
+						<p class="fragment" data-fragment-index="2"><span class="includes">Value</span> - primitive, object, function</p>
+						<h3 class="fragment" data-fragment-index="3"><span class="red">!!!</span>all in javascript is an object</h3>
+					</section>
+				</section>
+				<section>
+				<section><h2><span class="key">es2015(es6)</span> classes</h2>
+					<pre class="fragment"><code>
+class People {
+	constructor(lastname) {
+		this.lastname = lastname;
+	}
+	say(message) {
+		console.log(this.lastname + ': "' + message + '"');
+	}
+}
+					</pre></code>
+					<pre class="fragment"><code>
+	const artur = new LegoMan('Artur');
+	artur.say('Hello!'); // Artur: "Hello!"
+													</pre></code>
+				</section>
+				<section>
+						<h2>Classes in JS <span class="key">ES2015 classes</span></h2>
+						<pre class="fragment"><code>
+// TypeError: Class constructor LegoMan cannot be invoked without 'new'
+const artur = People('Artur');
+						</pre></code>
+                        <pre class="fragment"><code>
+// SyntaxError: A class may only have one constructor
+class People {
+    constructor(lastname) { }
+
+    constructor(lastname) { }
+}
+						</pre></code>
+				</section>
+				<section>
+						<h2>Classes in JS <span class="key">ES2015 classes</span></h2>
+						<pre class="fragment"><code>
+class People {
+    constructor(lastname) {
+        this.lastname = lastname;
+        this.age = 0;
+    }
+
+    set newAge(value) {
+        this.age = value;
+    }
+
+    get represent() {
+        return `My name is ${this.name}. I am ${this.age} years old.`;
+    }
+}
+						</pre></code>
+						<pre class="fragment"><code>
+const artur = new People('Artur');
+artur.represent // My name is Artur. I am 0 years old.
+artur.newAge = 18;
+artur.represent // My name is Artur. I am 18 years old.
+														</pre></code>
+					</section>
+				</section>
+				<section>
+					<section>
+							<h2><span class="key">typeof</span></h2>
+							<pre class="fragment"><code>
+	typeof 11 // "number"
+	typeof 5.17 // "number"
+	typeof 'Artur' // "string"
+	typeof foo // "function"
+	typeof false // "boolean"
+	typeof {} // "object""
+							</pre></code>
+							<pre class="fragment"><code>
+	typeof null // "object"
+	typeof new Number(321) // "object"
+	typeof [] // "object", Array.isArray should be used
+	typeof NaN // "number"
+	
+							</pre></code>
+				
+					</section>
+				</section>
+				<section>
+				<section>
+                        <h2><span class="key">Inheritance</span></h2>
+                        <h4 class="fragment"><span class="includes">Classical</span> (JAVA, C++)</h4>
+                        <ul>
+                            <li class="fragment">classes inherit from classes</li>
+                            <li class="fragment">are being created subclasses : hierarchical classes</li>
+                        </ul>
+                        <h4 class="fragment"><span class="includes">Prototypal</span>(JavaScript)</h4>
+                        <ul>
+                            <li class="fragment">A prototype is a working object instance</li>
+                            <li class="fragment">objects are inherited from other objects</li>
+                        </ul>
+					</section>
+				</section>
+				<section>
+                        <h2><span class="key">Inheritance ES2015</span></h2>
+                        <section><pre class="fragment"><code>
+class PeopleMan extends People {
+    constructor(lastname) {
+        super(lastname);
+    }
+
+    say(message) {
+        console.log('man');
+        super.say(message);
+        console.log('man');
+    }
+}
+						</pre></code>
+						<pre class="fragment"><code>
+	const ivanov = new PeopleMan('Ivanov');
+	ivanov.say('hello, I'm Ivanov');
+	// man
+	// Ivanov: 'hello, I'm Ivanov'
+	// man
+						</pre></code>
+					</section>
+				</section>
+				<section>
+				<section>
+						<h2><span class="includes">advantages</span> of classes</h2>
+						<ul>
+							<li class="fragment">help to organize data relationships</li>
+							<li class="fragment">extensibility</li>
+							<li class="fragment">help to define data structures</li>
+						</ul>
+					</section>
+					<section>
+						<h2><span class="includes">minuses</span> of classes</h2>
+						<ul>
+							<li class="fragment">not flexible</li>
+							<li class="fragment">a lot of time designing the code</li>
+							<li class="fragment">may destroy "transparency" of logic</li>		
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h3><span class="includes">Useful links</span></h3>
+					<ul>
+						<li><a href="https://www.youtube.com/watch?v=wfMtDGfHWpA">Composition over Inheritance</a></li>
+						<li><a href="https://mrale.ph/v8/resources.html">V8 Resources</a></li>
+						<li><a href="https://learn.javascript.ru/class-inheritance">learn javascript</a></li>
+						<li><a href="https://habr.com/post/131714/">habr-inheritance</a></li>
+						<li><a href="https://monsterlessons.com/project/lessons/prototipnoie-nasliedovaniie-v-javascript">monsterlessons/classes</a></li>
+
+					</ul>
+				</section>
+				<section><h2><em class="key">Thanks for your attention!</em></h2></section>	
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
